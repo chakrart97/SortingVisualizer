@@ -34,6 +34,19 @@ public class ShellSort implements SortAlgorithm {
     @Override
     public void sort(SortArray arr) {
         // TODO: write shell sort here
-
+        int size = arr.size();
+        for (int h = 4; h > 0; h /= 3) {
+            for (int i = h; i < size; ++i) {
+                int numSwaps = 0;
+                for (int j = i - h; j >= 0; j -= h) {
+                    if (arr.less(i, j)) ++numSwaps;
+                    else if (arr.less(j, i)) break;
+                }
+                for (int k = i; k >= i - numSwaps * h + h; k -= h) {
+                    arr.swap(k, k - h);
+                }
+                arr.mark("h=" + h + " i=" + i);
+            }
+        }
     }
 }

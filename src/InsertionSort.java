@@ -30,11 +30,20 @@ public class InsertionSort implements SortAlgorithm {
     @Override
     public String getName() { return "Insertion Sort"; }
 
-
-
     @Override
     public void sort(SortArray arr) {
-
+        int size = arr.size();
+        for (int i = 1; i < size; ++i) {
+            int numSwaps = 0;
+            for (int j = i-1; j >= 0; --j) {
+                if (arr.less(i, j)) ++numSwaps;
+                if (arr.less(j, i)) break;
+            }
+            for (int k = i; k >= i - numSwaps + 1; --k) {
+                arr.swap(k, k-1);
+            }
+            arr.mark("i=" + i);
+        }
     }
 
 }
